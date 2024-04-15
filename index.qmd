@@ -202,7 +202,7 @@ corr_plot
 
 ```{r}
 #| fig-height: 7
-#| fig-width: 14
+#| fig-width: 16
 
 corr_plot
 

@@ -4,7 +4,7 @@ version: 0.0.2
 contributes:
   formats: 
     revealjs:
-      logo: Uea.jpg
+      logo: UEA.jpg
       theme: LUstyle.scss
       height: 900
       width: 1600
