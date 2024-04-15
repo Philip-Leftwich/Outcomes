@@ -1,0 +1,356 @@
+---
+title: "Student Success"
+subtitle: "Examining Quantitative Metrics "
+author: "Dr Philip Leftwich"
+format:
+  LUstyle-revealjs:
+    self-contained: true
+    auto-stretch: false
+    footer: "{{< fa envelope >}} [p.leftwich@uea.ac.uk](mailto: p.leftwich@uea.ac.uk) {{< fa globe >}} [philip.leftwich.github.io](https://philip.leftwich.github.io/) {{< fa brands linkedin >}} [philip-leftwich](https://www.linkedin.com/in/philip-leftwich-117052155/)"
+    
+    always_allow_html: yes
+---
+
+
+
+## About me
+
+```{r}
+#| include: false
+#| message: false
+#| warning: false
+
+source("descriptive.R")
+
+```
+
+::: columns
+::: {.column .right}
+
+Associate Professor in Data Science and Genetics at the [University of East Anglia](https://www.uea.ac.uk/).
+
+<br>
+
+:::{.fragment}
+
+Academic background in Behavioural Ecology, Genetics, and Insect Pest Control.
+
+:::
+
+<br>
+
+:::{.fragment}
+
+I teach Genetics, Programming, and Statistics
+
+:::
+
+:::
+
+::: {.column}
+
+![](images/UEA.jpg){fig-align="center" fig-alt="UEA logo" width=70%}
+
+:::
+:::
+
+
+
+
+## What to expect during this talk
+
+::: columns
+::: {.column}
+
+A short talk on using quantitative data to measure student success
+
+<br>
+
+I hope you end up with more questions than answers after this talk!
+
+:::
+
+::: {.column .center-text}
+
+<br>
+
+![](images/great-question.gif){fig-align="center" fig-alt="Schitts Creek questions gif" width=60%}
+
+<small>Source: <a href="https://giphy.com/gifs/schittscreek-64afibPa7ySzhFAf00">giphy.com</a></small>
+
+:::
+:::
+
+
+## Questions
+
+:::{.incremental}
+
+- What, if any, quantitivative measures predict student success?
+
+- Can we use these measures to intervene earlier with students who would otherwise not submit work?
+
+- Do Quantitative measures align with student perceptions of success/effort?
+
+- Do Quantitative measures align with *our* perceptions of success/effort?
+
+:::
+
+## Background
+
+:::{.incremental}
+
+
+- A cohort of Biological sciences students
+
+- Data is from a second year module on statistics and programming
+
+- 69 students opted-in to measures of:
+
+    - In-person attendance at workshops
+    - Logged work hours
+    - Participation in weekly assignments/tests
+    
+:::
+
+
+# Descriptive Statistics {background-color="#D9DBDB"}
+
+
+## In-person attendance
+
+
+```{r}
+#| echo: false
+#| message: false
+#| fig-height: 7
+#| fig-width: 14
+
+attendance_plot
+
+```
+
+## Weekly tasks completion rates
+
+```{r}
+#| echo: false
+#| fig-height: 7
+#| fig-width: 14
+
+tasks_plot
+
+```
+
+## Effort hours
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| fig-height: 6
+#| fig-width: 13
+
+oct_nov +
+  stat_summary(
+    geom = "text",
+    fun = "median",
+    aes(label = paste(round(..y.., 2), "hours"),
+        color = month,
+        color = after_scale(darken(color, .1, space = "HLS"))),
+    family = "Roboto Mono",
+    fontface = "bold",
+    size = 5,
+    vjust = 6
+  )
+
+```
+
+##
+
+```{r}
+#| fig-height: 4
+#| layout-ncol: 2
+#| layout-nrow: 2
+
+tasks_plot
+
+oct_nov
+
+attendance_plot
+
+
+```
+
+##
+
+```{r}
+#| fig-height: 4
+#| layout-ncol: 2
+#| layout-nrow: 2
+
+tasks_plot
+
+oct_nov
+
+attendance_plot
+
+corr_plot
+
+```
+
+## Correlations
+
+```{r}
+#| fig-height: 7
+#| fig-width: 14
+
+corr_plot
+
+```
+
+## Predictive Outcomes
+
+
+```{r}
+#| out.width = "80%"
+
+load("dredge-model")
+summary(model.avg(best, subset = delta < 1)) |> 
+  gtsummary::tbl_regression(label = c(`Coursework-time` ~ "Coursework Hours",
+                            `Days of work` ~ "Coursework Days",
+                            `Coursework-time:Attendance` ~ "Coursework Hours:Attendance")) |> 
+                            gtsummary::as_gt() |> 
+                            gt::tab_options(
+                            table.font.size = 28)
+
+```
+
+:::{.incremental}
+
+- Mean coursework mark 66%
+
+- Model accounts for 60% of variance in student attainment
+
+- Multiple candidate models were combined to produce an ensemble model that provides the most robust and reliable predictions
+
+:::
+
+
+
+# Non-submission {background-color="#D9DBDB"}
+
+## Probability of non-submission
+
+```{r}
+#| fig-height: 7
+#| fig-width: 12
+
+risk_plot + inset_element(risk_table, left = 0.61, bottom = 0.6, right = 1, top = 1.1) 
+
+```
+
+## Applications
+
+::: columns
+
+::: {.column}
+
+**Black box - Machine learning**
+
+:::{.fragment}
+
+PROS
+
+- Maximum predictive ability
+
+- Identify and intervene with students
+
+- Can be trained on a wide range of data
+
+:::
+
+:::{.fragment}
+
+CONS
+
+
+- Opaque
+
+:::
+
+:::
+
+:::{.column}
+
+
+
+**Identify key variables**
+
+:::{.fragment}
+
+PROS
+
+- Transparent
+
+- Engages students with decision making
+
+CONS
+
+- Less accurate
+
+- More difficult to implement?
+
+:::
+
+:::
+
+:::
+
+
+## Where next
+
+:::{.incremental}
+
+- Studies to compare Quantitative and Qualitative measures of student success
+
+- Evalutate student perceptions of requirements or indicators of "academic success"
+
+- Larger scale data training to build predictive models
+
+:::
+
+# Wrap-up {background-color="#D9DBDB"}
+
+
+- Increasing amounts of data available on student participation and engagement
+
+- Student engagement is not as simple as "In-person attendance"
+
+- Quantitative markers CAN be used as predictors of academic achievement
+
+
+## 
+
+::: columns
+::: {.column}
+
+<br>
+
+{{< fa brands linkedin >}} [philip-leftwich](https://www.linkedin.com/in/philip-leftwich-117052155/)
+
+{{< fa brands mastodon >}} [\@ecoevo.social\@PhilipLeftwich](https://ecoevo.social/@PhilipLeftwich)
+
+{{< fa brands twitter >}} [@PhilipLeftwich](https://twitter.com/PhilipLeftwich)
+
+{{< fa brands github >}} [PhilipLeftwich](https://github.com/Philip-Leftwich)
+
+{{< fa globe >}} [philip.leftwich.github.io](https://philip.leftwich.github.io/)
+
+
+
+:::
+::: {.column}
+
+
+:::
+:::
