@@ -88,9 +88,15 @@ I hope you end up with more questions than answers after this talk!
 
 - What, if any, quantitivative measures predict student success?
 
+<br>
+
 - Can we use these measures to intervene earlier with students who would otherwise not submit work?
 
+<br>
+
 - Do Quantitative measures align with student perceptions of success/effort?
+
+<br>
 
 - Do Quantitative measures align with *our* perceptions of success/effort?
 
@@ -103,7 +109,11 @@ I hope you end up with more questions than answers after this talk!
 
 - A cohort of Biological sciences students
 
+<br>
+
 - Data is from a second year module on statistics and programming
+
+<br>
 
 - 69 students opted-in to measures of:
 
@@ -200,13 +210,36 @@ corr_plot
 
 ## Correlations
 
+::: columns
+
+::: {.column}
+
 ```{r}
-#| fig-height: 7
-#| fig-width: 16
+#| fig-height: 9
+#| fig-width: 6
 
 corr_plot
 
 ```
+
+:::
+
+:::{.column}
+
+- **Coursework Days** - Time between coursework started and submitted
+
+- **Learning Hours** - Time on system before coursework released
+
+- **Coursework Hours** - Time on system after coursework released
+
+- **Attendance** - In-person attendance
+
+- **Weekly assignment** - Completion of weekly tasks/tests
+
+:::
+
+:::
+
 
 ## Predictive Outcomes
 
@@ -240,6 +273,16 @@ summary(model.avg(best, subset = delta < 1)) |>
 # Non-submission {background-color="#D9DBDB"}
 
 ## Probability of non-submission
+
+- 9/69 students did not submit coursework
+
+- Using a logistic regression model to separate coursework by submission/non-submission
+
+- Can we use quantitative measures to identify students at risk of non-submission?
+
+## Probability of non-submission
+
+The first four weeks are a good indicator for risk of non-submission
 
 ```{r}
 #| fig-height: 7

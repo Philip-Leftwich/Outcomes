@@ -66,7 +66,7 @@ full_data1 <- filter(full_data, `Score-001` > 0) |>
 
 pal1 <- c("#FF8C00", "#A034F0")
 
-sub <- 'Average learning time in <span style ="color:#A034F0">October</span> and <span style ="color:#FF8C00">November</span> '
+sub <- 'Average time on system in <span style ="color:#A034F0">October</span> and <span style ="color:#FF8C00">November</span> '
 
 oct_nov <- data |> 
   select(c(`October-time`, `Nov-time`)) |> 
@@ -173,7 +173,7 @@ tasks_plot <- full_data |>
              fill = weekly_assignments))+
   geom_col()+
   geom_label(aes(label = perc),
-             hjust = 1.1,
+             hjust = 1,
              fill = "white",
              fontface = "bold") +
   coord_flip()+
@@ -213,7 +213,8 @@ corr_plot <- full_data |>
   ggcorrplot(hc.order = TRUE, type = "lower",
              lab = TRUE)+
   labs(fill = "Correlation") +
-  scale_fill_viridis(option = "cividis", limits = c(-.5,.6))
+  scale_fill_viridis(option = "cividis", limits = c(-.5,.6))+
+  theme(legend.position = "bottom")
 
 
 ### Non submission
