@@ -104,24 +104,37 @@ I hope you end up with more questions than answers after this talk!
 
 ## Background
 
-:::{.incremental}
+::: columns
+::: {.column}
 
+:::{.fragment}
 
 - A cohort of Biological sciences students
 
 <br>
 
 - Data is from a second year module on statistics and programming
+  - 1 x Weekly lecture
+  - 1 x Weekly Workshop
 
-<br>
+:::
+
+:::
+
+:::{.column}
+
+:::{.fragment}
 
 - 69 students opted-in to measures of:
 
-    - In-person attendance at workshops
+    - In-person attendance
     - Logged work hours
     - Participation in weekly assignments/tests
+    - Summative assignment at the end of term
     
 :::
+:::
+::::
 
 
 # Descriptive Statistics {background-color="#D9DBDB"}
@@ -286,11 +299,51 @@ The first four weeks are a good indicator for risk of non-submission
 
 ```{r}
 #| fig-height: 7
-#| fig-width: 12
+#| fig-width: 13
 
 risk_plot + inset_element(risk_table, left = 0.61, bottom = 0.6, right = 1, top = 1.1) 
 
 ```
+
+
+## Term 2
+
+- Continued weekly assignments
+
+- A course test in week **four**
+
+- Summative assignment at the end of term
+
+*Do early markers of engagement continue to predict student outcomes?*
+
+##
+
+```{r, include = FALSE}
+source("term_2.R")
+
+```
+
+```{r}
+#| fig-height: 7
+#| fig-width: 13
+#| out-width: 100%
+
+plot_1
+
+```
+
+
+##
+
+```{r}
+#| fig-height: 7
+#| fig-width: 13
+#| out-width: 100%
+
+plot_2 + inset_element(full_table, left = 0.61, bottom = 0, right = 1, top = .4) 
+
+```
+
 
 ## Applications
 
@@ -356,7 +409,7 @@ CONS
 
 - Studies to compare Quantitative and Qualitative measures of student success
 
-- Evalutate student perceptions of requirements or indicators of "academic success"
+- Evaluate student perceptions of requirements or indicators of "academic success"
 
 - Larger scale data training to build predictive models
 
@@ -372,7 +425,7 @@ CONS
 - Quantitative markers CAN be used as predictors of academic achievement
 
 
-## 
+##
 
 ::: columns
 ::: {.column}

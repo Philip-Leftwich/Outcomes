@@ -312,3 +312,5 @@ plot <- full_data |>
     plot.title = element_markdown(face = "bold", size = 21),
     plot.subtitle = element_markdown(),
     plot.title.position = "plot")
+
+
